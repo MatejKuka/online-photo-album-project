@@ -1,14 +1,15 @@
 import {initializeApp} from "firebase/app";
-import {getAuth, connectAuthEmulator} from "firebase/auth"
+import {getAuth} from "firebase/auth"
 import {getStorage} from "firebase/storage";
+import {FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGE_SENDER_ID, FIREBASE_PROJECT_ID, FIREBASE_KEY, FIREBASE_APP_ID, FIREBASE_DOMAIN} from "./env-config"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAXGIS3BQKSzNfxOqhHPLKo0XAtIzmXKfU",
-    authDomain: "online-photo-album-project.firebaseapp.com",
-    projectId: "online-photo-album-project",
-    storageBucket: "online-photo-album-project.appspot.com",
-    messagingSenderId: "329673590806",
-    appId: "1:329673590806:web:b0f7ef75b8f5eba627cd37"
+    apiKey: FIREBASE_KEY,
+    authDomain: FIREBASE_DOMAIN,
+    projectId: FIREBASE_PROJECT_ID,
+    storageBucket: FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: FIREBASE_MESSAGE_SENDER_ID,
+    appId: FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

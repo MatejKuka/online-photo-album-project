@@ -13,7 +13,6 @@ import {imageNameParser} from "../../utils";
 function SingleAlbumPage() {
     const params = useParams();
     const navigate = useNavigate();
-    const albumNameEndpoint = "My animals album";
 
     const [photos, setPhotos] = useState<IPhoto[]>([]);
 
@@ -71,7 +70,6 @@ function SingleAlbumPage() {
         <>
             <Navigation/>
             <div className={"p-10 custom-bg-vanilla"}>
-                <h1 className={"text-center text-5xl font-semibold"}>{albumNameEndpoint}</h1>
                 <button onClick={handleOpen} className={"button-primary text-xl font-semibold mx-2"}>Add</button>
                 <button onClick={handleEditClick} className={"button-primary text-xl font-semibold mx-2"}>Edit</button>
                 <button onClick={handleDeleteClick} className={"button-primary text-xl font-semibold mx-2"}>Delete
