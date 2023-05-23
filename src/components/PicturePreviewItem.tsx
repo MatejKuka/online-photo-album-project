@@ -7,11 +7,6 @@ interface IPicturePreviewItemProps {
 
 function PicturePreviewItem({title, imgUrl}: IPicturePreviewItemProps) {
 
-
-    function handleDeleteItem() {
-
-    }
-
     return (
         <div className={"custom-bg-brown w-full w-[1500px] p-6 my-4 mx-auto rounded-2xl relative"}>
             <Grid container>
@@ -22,7 +17,6 @@ function PicturePreviewItem({title, imgUrl}: IPicturePreviewItemProps) {
                     <h2 className={"text-5xl font-semibold"}>{title}</h2>
                 </Grid>
             </Grid>
-            <div onClick={handleDeleteItem} className={"absolute custom-bg-green px-3 py-1 rounded-full font-bold text-2xl text-red-700 top-2 right-2 hover:cursor-pointer"}>X</div>
         </div>
     );
 }

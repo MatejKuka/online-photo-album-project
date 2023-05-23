@@ -8,6 +8,8 @@ import {getDownloadURL, listAll, ref, uploadBytes, deleteObject} from "firebase/
 import {auth, storage} from "../../firebase";
 import {createPhoto, IPhoto} from "../../types/Photo";
 import {imageNameParser} from "../../utils";
+import toast, {Toaster} from "react-hot-toast";
+
 
 //params.albumId
 function SingleAlbumPage() {
@@ -15,6 +17,7 @@ function SingleAlbumPage() {
     const navigate = useNavigate();
 
     const [photos, setPhotos] = useState<IPhoto[]>([]);
+    const [albumTitle, setAlbumTitle] = useState<string>();
 
     const [newTitle, setNewTitle] = useState<string>("");
     const [newImage, setNewImage] = useState<File | null>();
@@ -23,10 +26,6 @@ function SingleAlbumPage() {
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-    function handleEditClick() {
-
-    }
 
     const handleAddPhoto = () => {
         if (newImage == null || newTitle === "") return
@@ -56,22 +55,31 @@ function SingleAlbumPage() {
     }
     useEffect(() => {
         getAllPhotos();
+        if (localStorage.getItem(params.albumId!)) {
+            setAlbumTitle(localStorage.getItem(params.albumId!)!)
+        }
     }, [])
 
+
     function handleDeleteClick() {
-        const deletePhotosRef = ref(storage, `photos/${auth.currentUser?.uid}/${params.albumId}`)
-        const deleteAlbumRef = ref(storage, `albums/${auth.currentUser?.uid}`)
-        deleteObject(deletePhotosRef).then(() => {
-            deleteObject(deleteAlbumRef)
-        }).then(() => navigate(-1));
+        if (localStorage.getItem(params.albumId!)) {
+            const albumId = params.albumId
+            const albumName = localStorage.getItem(params.albumId!);
+            const deleteAlbumRef = ref(storage, `albums/${auth.currentUser?.uid}/${albumName}-${albumId}`)
+            deleteObject(deleteAlbumRef).then(() => {
+                localStorage.removeItem(params.albumId!)
+                navigate(-1);
+            })
+        } else toast("Error")
     }
 
     return (
         <>
             <Navigation/>
+            <div><Toaster/></div>
             <div className={"p-10 custom-bg-vanilla"}>
+                <p className={"text-4xl text-center font-semibold"}>{albumTitle}</p>
                 <button onClick={handleOpen} className={"button-primary text-xl font-semibold mx-2"}>Add</button>
-                <button onClick={handleEditClick} className={"button-primary text-xl font-semibold mx-2"}>Edit</button>
                 <button onClick={handleDeleteClick} className={"button-primary text-xl font-semibold mx-2"}>Delete
                 </button>
                 <div className={"pt-10"}>
