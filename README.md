@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+OPA (Online photo album)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+--Project description--
 
-## Available Scripts
+This is a simple server-less web application, where you create an account and sort your favorite photos into albums. 
+It consists of the main page where you can see all your albums and do CRUD methods. Each album can be then opened with its pictures nicely laid out in a grid.
+Then there is a profile page where the user can do basic actions related to profile management 
 
-In the project directory, you can run:
+--Tech stack--
 
-### `npm start`
+Front-end is built with react
+We store our data using Firebase storage
+For cloud functions, we also use Firebase Cloud Functions
+Authentification is handled by Firebase Authentification
+To handle HTTPS requests in the front-end we use AXIOS (npm install axios)
+And to run the app, emulators for cloud functions are needed (npm install -g firebase-tools)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+--Functionality--
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+User is presented by a login page where he/she can sign up or log in, in case of signing in he/she will receive a mail confirming the successful creation of a new account. 
+When a user is logged in, he/she is presented with their main page with all their albums. User can only get to this page after logging in and that is done by routing so that non-logged user will not be able to get to this page. If they would try to send a get of post request (for example using postman), we set up read/write rules, that only allow read/write if the user.uid is not null and the same applies for the auth.token 
+==(our use of firebase authentification and setting up rules).==
 
-### `npm test`
+Albums and photos are stored in Firebase storage, one slightly important thing is that the first photo will carry the name of the album. Each photo has its id, only the first one has the name of the album and id (which is separated from id by a dash). 
+==(our use of firebase storage)==
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+When user creates or deletes his/her profile he will receive a mail notifying about such an action and that is handled by our cloud function. ONLINE-PHOTO-ALBUM-PROJECT -> functions -> index.js
+==(our use of firebase cloud functions)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
