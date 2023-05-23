@@ -71,30 +71,17 @@ function SignInPage() {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary"/>}
-                        label="Remember me"
-                    />
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                    >
-                        Sign In
+                    >Sign In
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link className={"text-blue-500 hover:cursor-pointer underline"} to="/sign-up">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link className={"text-blue-500 hover:cursor-pointer underline"} to="/sign-up">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
+                    <Link className={"text-blue-500 hover:cursor-pointer underline"} to="/sign-up">
+                        {"Don't have an account? Sign Up"}
+                    </Link>
+
                 </Box>
             </Box>
         </Container>
