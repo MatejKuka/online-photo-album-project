@@ -55,7 +55,6 @@ function SignInPage() {
                         fullWidth
                         id="email"
                         label="Email Address"
-                        value={"test2@test.com"}
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -65,7 +64,6 @@ function SignInPage() {
                         required
                         fullWidth
                         name="password"
-                        value={"testtest"}
                         label="Password"
                         type="password"
                         id="password"
@@ -89,3 +87,6 @@ function SignInPage() {
 }
 
 export default SignInPage;
+
+// username: test2@test.com
+// pass: testtest
