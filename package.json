@@ -27,7 +27,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:e2e1": "node __tests__/e2e/create-album-playwright.js",
+    "test:e2e2": "node __tests__/e2e/sign-in-playwright.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,6 +51,8 @@
     ]
   },
   "devDependencies": {
+    "jest": "^27.5.1",
+    "playwright": "^1.34.1",
     "tailwindcss": "^3.3.2"
   }
 }
