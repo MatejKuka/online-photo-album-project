@@ -25,5 +25,5 @@ Albums and photos are stored in Firebase storage, one slightly important thing i
 ==(our use of firebase storage)==
 
 When user creates or deletes his/her profile he will receive a mail notifying about such an action and that is handled by our cloud function. ONLINE-PHOTO-ALBUM-PROJECT -> functions -> index.js
-==(our use of firebase cloud functions)
+==(our use of firebase cloud functions)==
 
