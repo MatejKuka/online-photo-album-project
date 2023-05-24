@@ -15,7 +15,11 @@ function AlbumsPreview() {
     const [albums, setAlbums] = useState<IAlbumPreview[]>([]);
 
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setNewTitle("");
+        setNewImage(null);
+        setOpen(false)
+    };
 
     const handleCreateAlbum = () => {
         if (newImage == null || newTitle === "") return
@@ -65,11 +69,8 @@ function AlbumsPreview() {
                 <div className={"bg-white rounded-2xl w-[400px] p-8"}>
                     <h1 className={"text-2xl font-semibold text-center mb-4"}>Create New Album</h1>
                     <p className={"mb-2"}>Title:</p>
-                    <input value={newTitle} onChange={(event) => {
-                        if (event.target.value) {
-                            setNewTitle(event.target.value.trim())
-                        }
-                    }} className={"border-2 border-gray-500 p-2 w-full"} type="text" placeholder={"My Holiday 2022"}/>
+                    <input value={newTitle} onChange={(event) => setNewTitle(event.target.value.trim())}
+                           className={"border-2 border-gray-500 p-2 w-full"} type="text" placeholder={"My Holiday 2022"}/>
                     <p className={"my-2"}>Choose picture of your album:</p>
                     <input onChange={(event) => {
                         if (event.target.files) {

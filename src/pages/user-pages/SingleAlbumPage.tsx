@@ -19,13 +19,17 @@ function SingleAlbumPage() {
     const [photos, setPhotos] = useState<IPhoto[]>([]);
     const [albumTitle, setAlbumTitle] = useState<string>();
 
-    const [newTitle, setNewTitle] = useState<string>("");
+    const [newTitle, setNewTitle] = useState<string>();
     const [newImage, setNewImage] = useState<File | null>();
 
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setNewTitle("");
+        setNewImage(null);
+        setOpen(false)
+    };
 
     const handleAddPhoto = () => {
         if (newImage == null || newTitle === "") return
@@ -35,7 +39,7 @@ function SingleAlbumPage() {
         uploadBytes(imageRef, newImage).then(() => {
             getDownloadURL(imageRef).then((url) => {
                 setOpen(false);
-                const createdPhoto = createPhoto(idGenerator, newTitle, url);
+                const createdPhoto = createPhoto(idGenerator, newTitle!, url);
                 setPhotos((prev) => [...prev, createdPhoto]);
             }).catch(error => console.log(error))
         }).catch(error => console.log(error))
@@ -95,11 +99,8 @@ function SingleAlbumPage() {
                    className={"flex justify-center items-center"}>
                 <div className={"bg-white rounded-2xl w-[400px] p-8"}>
                     <h1 className={"text-2xl font-semibold text-center mb-4"}>Title:</h1>
-                    <input value={newTitle} onChange={(event) => {
-                        if (event.target.value) {
-                            setNewTitle(event.target.value.trim())
-                        }
-                    }} placeholder={"My friend in Paris"} className={"border-2 border-gray-500 p-2 w-full"}
+                    <input value={newTitle} onChange={(event) => setNewTitle(event.target.value.trim())}
+                           placeholder={"My friend in Paris"} className={"border-2 border-gray-500 p-2 w-full"}
                            type="text"/>
                     <h1 className={"text-2xl font-semibold text-center mb-4"}>Add photo</h1>
                     <input onChange={(event) => {
