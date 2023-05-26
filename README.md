@@ -3,6 +3,9 @@ OPA (Online photo album)
 The link to the deployed project:
 https://lucky-semolina-44ac39.netlify.app/
 
+Github code:
+https://github.com/MatejKuka/online-photo-album-project
+
 --Project description--
 
 This is a simple server-less web application, where you create an account and sort your favorite photos into albums. 
