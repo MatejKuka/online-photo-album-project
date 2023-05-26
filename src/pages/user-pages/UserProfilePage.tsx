@@ -9,14 +9,14 @@ import {UserAuth} from "../../context/AuthContext";
 
 //params.userId
 function UserProfilePage() {
+    const {updateUserDisplayName, user} = UserAuth();
+
     const [imageUpload, setImageUpload] = useState<File | null>(null);
     const [profileImage, setProfileImage] = useState<string | null>(null);
+    const [nameProfile, setNameProfile] = useState<string>(user?.displayName!)
 
     const navigate = useNavigate();
-    const {updateUserDisplayName} = UserAuth();
 
-    const placeholderName = "Rock Johnson";
-    const placeholderPassword = "Password";
     const handleGoBackClick = () => navigate(-1);
 
     const handleSaveChangePhoto = () => {
@@ -27,6 +27,10 @@ function UserProfilePage() {
                 setProfileImage(url)
             }).catch(error => console.log(error))
         }).catch(error => console.log(error))
+    }
+
+    const handleSaveNewName = () => {
+        updateUserDisplayName(nameProfile);
     }
 
     useEffect(() => {
@@ -48,7 +52,6 @@ function UserProfilePage() {
                         <Grid item md={6}>
                             <p className={"text-3xl text-center"}>Change profile photo:</p>
                             <p className={"text-3xl my-4 text-center"}>Name:</p>
-                            <p className={"text-3xl text-center"}>Password:</p>
                         </Grid>
                         <Grid item md={6}>
                             <input onChange={(event) => {
@@ -56,17 +59,17 @@ function UserProfilePage() {
                                     setImageUpload(event.target.files[0])
                                 }
                             }} type="file" accept={".jpg, .png, .webp"} multiple={false}/>
-                            <input placeholder={placeholderName}
+                            <input value={nameProfile.toString()}
+                                   onChange={(event) => setNameProfile(event.target.value.trim())}
                                    className={"p-2 my-4 border-gray-500 border-2 w-5/6"}
-                                   type="text"/>
-                            <br/>
-                            <input placeholder={placeholderPassword}
-                                   className={" p-2 border-gray-500 border-2 w-5/6"}
                                    type="text"/>
                         </Grid>
                     </Grid>
                     <button onClick={handleSaveChangePhoto}
-                            className={"button-primary font-semibold text-3xl mx-auto block mt-8"}>Save
+                            className={"button-primary font-semibold text-3xl mx-auto block mt-8"}>Save new photo
+                    </button>
+                    <button onClick={handleSaveNewName}
+                            className={"button-primary font-semibold text-3xl mx-auto block mt-8"}>Save new name
                     </button>
                     <button onClick={handleGoBackClick}
                             className={"button-primary font-semibold text-3xl mx-auto block mt-8"}>Go back
